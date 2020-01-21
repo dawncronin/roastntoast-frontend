@@ -10,6 +10,8 @@ import NavBar from './components/NavBar';
 import Gallery from './containers/Gallery';
 import Home from './components/Home';
 import ProfilePage from './containers/ProfilePage';
+import PostPicture from './components/PostPicture';
+
 
 
 
@@ -56,6 +58,8 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/profile" component={ProfilePage} />
+        <Route exact path="/addpicture" component={PostPicture} />
+
       </div>
     </Router>
     );

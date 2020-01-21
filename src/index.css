@@ -15,3 +15,10 @@ code {
 .navBar{
   /* background-color: red */
 }
+
+.logo{
+  border-radius: 4px;
+  padding: 20px 5px 5px 5px;
+  width: 200px;
+}
+
