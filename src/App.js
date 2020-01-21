@@ -5,26 +5,21 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-
 import NavBar from './components/NavBar';
 import Gallery from './containers/Gallery';
 import Home from './components/Home';
 import ProfilePage from './containers/ProfilePage';
 import PostPicture from './components/PostPicture';
-
-
-
-
-
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      current_user: {},
+      currentUser: {},
       pictures: [],
-      users: [],
       comments: []
     }
   }
@@ -37,6 +32,7 @@ class App extends Component {
         this.setState({ currentUser });
       });
     };
+      this.setState({pictures: api.pictures.getPictures})
   };
 
   handleLogin = json => {
@@ -54,12 +50,13 @@ class App extends Component {
     return (
       <Router>
       <div className="app">
-        <NavBar />
+        <NavBar handleLogout={this.handleLogout} currentUser={this.state.currentUser}/>
         <Route exact path="/" component={Home} />
+        <Route exact path="/login"   render={(props) => <Login {...props} handleLogin={this.handleLogin}/>} />
+        <Route exact path="/signup"   render={(props) => <SignUp {...props} handleLogin={this.handleLogin}/>} />
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/addpicture" component={PostPicture} />
-
       </div>
     </Router>
     );

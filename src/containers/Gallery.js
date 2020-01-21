@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
+import Filter from "../components/Filter"
+import PictureList from "../containers/PictureList"
+
 
 
 class Gallery extends Component{
+    constructor() {
+        super()
+        this.state = {
+            displayedPictures: {}
+        }
+    }
+    
 
     render() {
     return (
         <div className="gallery">
-            <h1>gallery</h1>
+            <Filter/>
+            <PictureList />
         </div>
     )
     }
