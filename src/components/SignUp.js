@@ -18,7 +18,7 @@ class SignUp extends Component {
         const newFields = { ...this.state.fields, [e.target.name]: e.target.value };
         this.setState({ fields: newFields });
     }
-    
+
     handleSubmit = e => {
         e.preventDefault();
         api.singUp(this.state.fields.username, this.state.fields.password, this.state.fields.passwordConfirmation)
@@ -34,7 +34,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div className="signUp">
+            <div className="signup">
                 <h1> Sign Up</h1>
                 {this.state.error ? <h3>Invalid Inputs, try again</h3> : null}
                 <form className="signUpForm">
