@@ -21,7 +21,7 @@ class SignUp extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        api.singUp(this.state.fields.username, this.state.fields.password, this.state.fields.passwordConfirmation)
+        api.signUp(this.state.fields.username, this.state.fields.password, this.state.fields.passwordConfirmation)
         .then(json => {
           if ( json.error ) {
             this.setState({ error: true })
@@ -37,7 +37,7 @@ class SignUp extends Component {
             <div className="signup">
                 <h1> Sign Up</h1>
                 {this.state.error ? <h3>Invalid Inputs, try again</h3> : null}
-                <form className="signUpForm">
+                <form className="signUpForm" onSubmit={this.handleSubmit}>
                     <label> Username
                     <input type="text" name="username" onChange={this.handleChange}/>
                     </label> <br/>

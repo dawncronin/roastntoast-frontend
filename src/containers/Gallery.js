@@ -8,6 +8,7 @@ class Gallery extends Component{
     constructor() {
         super()
         this.state = {
+            filter: "",
             displayedPictures: {}
         }
     }

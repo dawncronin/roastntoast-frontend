@@ -28,17 +28,17 @@ class App extends Component {
     const token = localStorage.getItem('token');
     if (token) {
       api.auth.getCurrentUser().then(user => {
-        const currentUser = user ;
-        this.setState({ currentUser });
+        this.setState({currentUser: user });
       });
     };
-      this.setState({pictures: api.pictures.getPictures})
+      // this.setState({pictures: api.pictures.getPictures})
   };
 
   handleLogin = json => {
     const currentUser = json;
     localStorage.setItem('token', currentUser.jwt );
-    this.setState({ currentUser });
+    this.setState({ currentUser: {username: currentUser.user.data.attributes.username, id: currentUser.user.data.id }});
+    console.log(currentUser)
   }
 
   handleLogout = () => {

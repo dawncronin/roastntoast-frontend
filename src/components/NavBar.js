@@ -1,19 +1,18 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../logo.png'
 
 
 function NavBar(props) {
-    const loggedIn = !!props.currentUser.id;
+    let loggedIn = !!props.currentUser.id
 
-
+   
     return (
         <div className="navBar">
             <ul>
             <li> <img className="logo" src={Logo} alt='website logo' /> </li>
             <li className="nav"><NavLink to="/">Home</NavLink></li>
-            {/* {loggedIn? ( */ }
-            {false ? (
+            {loggedIn? (  
                 <div>
                 <li className="nav"><NavLink to="/gallery">Gallery</NavLink></li>
                 <li className="nav"><NavLink to="/profile">Profile</NavLink></li>
