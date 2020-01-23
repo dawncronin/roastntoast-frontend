@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Route
@@ -6,11 +6,9 @@ import {
   import ShowPicture from "../components/ShowPicture"
 
 
-function PicturesPage({match, pictures, roast, flipRoast, currentUser, handleNewComment}) {
+function PicturesPage({match, roast, flipRoast, currentUser}) {
     let flipState
     let currentState
-
-
 
     if (roast) {
         flipState = "Toast"
@@ -21,13 +19,12 @@ function PicturesPage({match, pictures, roast, flipRoast, currentUser, handleNew
         currentState = "Toasting"
     }
 
+    return(
 
-
-    return   (
         <div>
             <h1> Currently {currentState} </h1>
             <button onClick={flipRoast}>Flip to {flipState}</button>
-          <Route path={`${match.url}/:pictureId`} render={routerProps => <ShowPicture {...routerProps} handleNewComment={handleNewComment} roast={roast} pictures={pictures} currentUser={currentUser}/> }/>
+          <Route path={`${match.url}/:pictureId`} render={routerProps => <ShowPicture {...routerProps} roast={roast} currentUser={currentUser}/> }/>
         </div>
       )
 }

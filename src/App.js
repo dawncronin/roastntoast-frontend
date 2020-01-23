@@ -22,8 +22,7 @@ class App extends Component {
     this.state = {
       roast: true,
       currentUser: {},
-      pictures: [],
-      comments: [],
+      pictures: []
 
     }
   }
@@ -68,14 +67,8 @@ class App extends Component {
     this.setState({ currentUser: {} });
   };
 
-  handleNewComment = ({picture_id, roast, user_id, text}) => {
-   return api.comments.postComment({picture_id: picture_id, roast: roast, user_id: user_id, text: text}).then(res => {
-      api.pictures.getPictures().then( pictures => {
-        this.setState({pictures: pictures.data}) 
-        return res}
-      )
-    })
-  }
+
+  
   
   render() {
     return (
@@ -88,7 +81,9 @@ class App extends Component {
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/addpicture" component={PostPicture} />
-        <Route path={`/pictures`} render={(props) => <PicturesPage {...props} flipRoast={this.flipRoast} roast={this.state.roast} pictures={this.state.pictures} handleNewComment={this.handleNewComment} currentUser={this.state.currentUser}/>} />
+        <Route path={`/pictures`} render={(props) => <PicturesPage {...props} 
+              flipRoast={this.flipRoast} roast={this.state.roast} 
+              currentUser={this.state.currentUser}/>} />
       </div>
     </Router>
     );

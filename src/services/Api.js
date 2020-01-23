@@ -36,9 +36,20 @@ const getComment = (id) => {
     method: `Get`,
     headers: headers
   }).then(res => res.json())
-
 }
 
+const deleteComment = (id) => {
+  return fetch(`${API_ROOT}comments/${id}`, {
+    method: `Delete`,
+    headers: headers
+  }).then(res => res.json())
+}
+
+const getPicture = (id) => {
+  return fetch(`${API_ROOT}pictures/${id}`, { headers: headers }).then(res =>
+    res.json()
+  );
+};
 const signUp = (username, password, passwordConfirmation) => {
   return fetch(`${API_ROOT}users`, {
     method: `POST`,
@@ -76,11 +87,13 @@ export default {
   },
   pictures: {
     getPictures,
-    postPicture
+    postPicture,
+    getPicture
   },
   comments: {
     getComment,
     getComments,
-    postComment
+    postComment,
+    deleteComment
   }
 };

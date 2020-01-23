@@ -1,39 +1,62 @@
 import React, {Component} from 'react';
 import Comment from "./Comment"
 import AddComment from "./AddComment"
+import { render } from '@testing-library/react';
+import api from '../services/Api';
 
 
-function ShowPicture({match, pictures, roast, currentUser, handleNewComment}) {
-       let display = <h3>Loading...</h3>
-
-    if (pictures[0]) {
-   let pictureId = match.params.pictureId
-
-   let thisPic = pictures.find(pic => pic.id === pictureId)
-
-   let comments = thisPic.attributes.comments.filter(com => com.roast === roast)
-
-   comments = comments.map(com => < Comment comment={com} key={com.id}/>)
-
-
-
-    display =  <div><h3>{thisPic.id}</h3>
-     <img src={thisPic.attributes.img_url} alt={"picture"}/>
-     < AddComment roast={roast} currentUser={currentUser} pictureId={pictureId} handleNewComment={handleNewComment}/>
-     {comments}
-     </div>
-
+class ShowPicture extends Component {
+    constructor() {
+        super()
+        this.state = {
+            currentUser: "",
+            picture: {},
+            comments: []
+        }
     }
-    else {
-        display = <h3>Loading...</h3>
+    grabPictureData = () => {
+       return api.pictures.getPicture(this.props.match.params.pictureId).then(picture => {
+            this.setState({picture: picture.data}) 
+            let comments = picture.data.attributes.comments.filter(com => com.roast === this.props.roast)
+            comments = comments.map(com => < Comment handleCommentDelete={this.handleCommentDelete} comment={com} key={com.id} currentUser={this.state.currentUser}/>)
+            this.setState({comments: comments})
+            return picture
+        })  
     }
-    return ( 
-        <div>
-            {display}
-        </div>
+
+    handleCommentDelete = (id) => {
+        api.comments.deleteComment(id)
+        .then(() => this.grabPictureData())
+    }
+
+    componentDidMount() {
+        const token = localStorage.getItem('token');
+        if (token) {
+          api.auth.getCurrentUser().then(user => {
+            this.setState({currentUser: user });
+          }).then(() => this.grabPictureData())}
+        }
 
 
-    )
+
+    handleNewComment = ({picture_id, roast, user_id, text}) => {
+        return api.comments.postComment({picture_id: picture_id, roast: roast, user_id: user_id, text: text})
+        .then(() => this.grabPictureData())
+    }
+
+    
+    render() {   
+        return ( 
+            this.state.comments[0] ? (
+            <div>
+            <img src={this.state.picture.attributes.img_url} alt={"picture"}/>
+            < AddComment roast={this.props.roast} currentUser={this.state.currentUser} pictureId={this.state.picture.id} handleNewComment={this.handleNewComment}/>
+            {this.state.comments}
+            </div>
+            ) :
+            <div>loading</div>
+        )
+    }
 }
 
 export default ShowPicture
