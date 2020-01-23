@@ -78,7 +78,7 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/login"   render={(props) => <Login {...props} handleLogin={this.handleLogin}/>} />
         <Route exact path="/signup"   render={(props) => <SignUp {...props} handleLogin={this.handleLogin}/>} />
-        <Route exact path="/gallery" component={Gallery} />
+        <Route exact path="/gallery" render ={(props) => <Gallery {...props} pictures={this.state.pictures}/>} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/addpicture" component={PostPicture} />
         <Route path={`/pictures`} render={(props) => <PicturesPage {...props} 
