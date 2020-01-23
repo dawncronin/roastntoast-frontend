@@ -136,15 +136,15 @@ const getCurrentUser = () => {
   }).then(res => res.json());
 };
 
-const getUsers = () => {
-  return fetch(`${API_ROOT}users`, {
+const getUser = (id) => {
+  return fetch(`${API_ROOT}users/${id}`, {
     headers: headers
   }).then(res => res.json());
 }
 
 export default {
   signUp,
-  getUsers,
+  getUser,
   auth: {
     login,
     getCurrentUser
