@@ -14,12 +14,17 @@ class ShowPicture extends Component {
     }
     grabPictureData = () => {
        return api.pictures.getPicture(this.props.match.params.pictureId).then(picture => {
-            this.setState({picture: picture.data}) 
-            let comments = picture.data.attributes.comments.filter(com => com.roast === this.props.roast)
-            comments = comments.map(com => < Comment handleCommentDelete={this.handleCommentDelete} comment={com} key={com.id} currentUser={this.state.currentUser}/>)
-            this.setState({comments: comments})
+            this.setState({picture: picture.data})
             return picture
         })  
+    }
+
+    filterComments = () => {
+        if (this.state.picture.attributes) {
+            let comments = this.state.picture.attributes.comments.filter(com => com.roast === this.props.roast)
+            comments = comments.map(com => < Comment handleCommentDelete={this.handleCommentDelete} comment={com} key={com.id} currentUser={this.state.currentUser} roast={this.props.roast}/>)
+            return comments
+        }
     }
 
     handleCommentDelete = (id) => {
@@ -40,17 +45,14 @@ class ShowPicture extends Component {
         .then(() => this.grabPictureData())
     }
 
-    componentDidUpdate() {
-        this.grabPictureData()
-    }
-
     render() {   
+       const comments = this.filterComments()
         return ( 
             this.state.picture.attributes ? (
             <div>
             <img src={this.state.picture.attributes.img_url} alt={"picture"} width="600"/>
             < AddComment roast={this.props.roast} currentUser={this.state.currentUser} pictureId={this.state.picture.id} handleNewComment={this.handleNewComment}/>
-            {this.state.comments}
+            {comments}
             </div>
             ) :
             <div>loading</div>
