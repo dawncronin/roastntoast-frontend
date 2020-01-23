@@ -23,8 +23,10 @@ const postPicture = ({img_url, user_id, roast_bio, toast_bio}) => {
   return fetch(`${API_ROOT}pictures`, {
     method: `Post`,
     headers: headers,
+    redirect: "follow",
     body: JSON.stringify({picture: {img_url: img_url, user_id: user_id, roast_bio: roast_bio, toast_bio: toast_bio}})
-  }).then(res => res.json());
+  }).then(res => res.json())
+  
 }
 
 const postComment = ({text, roast, picture_id, user_id}) => {

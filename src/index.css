@@ -47,7 +47,7 @@ a {
 
 }
 
-.login, .signup {
+.login, .signup, .picturepost{
   background-color: rgb(233, 236, 236);
   text-align: center;
   width: 30%;

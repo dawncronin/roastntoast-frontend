@@ -10,9 +10,14 @@ class PostPicture extends Component{
             toast_bio: ''
         }
     }
+
     handleSubmit = (event) => {
         event.preventDefault()
         api.pictures.postPicture({img_url: this.state.img_url, roast_bio: this.state.roast_bio, toast_bio: this.state.toast_bio, user_id: this.props.currentUser.id})
+        .then(json => {
+            console.log(json)
+            this.props.history.push(`/pictures/${json.picture.data.id}`)
+        })
     }
     
     handleChange = (event) => {
@@ -25,8 +30,8 @@ class PostPicture extends Component{
 
     render(){
         return (
-            <div>
-                <form onSubmit ={this.handleSubmit}>
+            <div className= 'picturepost'>
+                <form className ='picturepostform' onSubmit ={this.handleSubmit}>
                     <label>Img URL: 
                     <input onChange = {this.handleChange} type = 'text' name = 'img_url'/><br></br>
                     </label>
