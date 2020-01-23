@@ -12,14 +12,28 @@ class ShowPicture extends Component {
             comments: []
         }
     }
+
+
     grabPictureData = () => {
        return api.pictures.getPicture(this.props.match.params.pictureId).then(picture => {
-            this.setState({picture: picture.data}) 
-            let comments = picture.data.attributes.comments.filter(com => com.roast === this.props.roast)
-            comments = comments.map(com => < Comment handleCommentDelete={this.handleCommentDelete} comment={com} key={com.id} currentUser={this.state.currentUser}/>)
-            this.setState({comments: comments})
+            this.setState({picture: picture})
+            console.log(picture)
             return picture
         })  
+    }
+
+    filterComments = () => {
+        if (this.state.picture.included) {
+            let comments = this.state.picture.included.filter(com => com.attributes.roast === this.props.roast)
+            comments = comments.map(com => < Comment 
+                handleCommentDelete={this.handleCommentDelete} 
+                comment={com} key={com.id} 
+                currentUser={this.state.currentUser} 
+                handleCommentLike={this.handleCommentLike}
+                handleCommentDislike={this.handleCommentDislike}
+                roast={this.props.roast}/>)
+            return comments
+        }
     }
 
     handleCommentDelete = (id) => {
@@ -39,18 +53,76 @@ class ShowPicture extends Component {
         return api.comments.postComment({picture_id: picture_id, roast: roast, user_id: user_id, text: text})
         .then(() => this.grabPictureData())
     }
+    
+    handlePictureLike = () => {
+        let like = this.state.picture.data.attributes.picture_likes.find(like => like.user_id === this.props.currentUser.id)
+        if (!like) {
+            api.pictures.postPictureLike(this.props.currentUser.id, this.state.picture.data.id)
+            .then (() => {
+                this.grabPictureData()
+            })
+            
+        }
+        else {
+            api.pictures.deletePictureLike(like.id).then(() => this.grabPictureData())
+        }
+    }
 
-    componentDidUpdate() {
-        this.grabPictureData()
+    handlePictureDislike = () => {
+        let dislike = this.state.picture.data.attributes.picture_dislikes.find(like => like.user_id === this.props.currentUser.id)
+        if (!dislike) {
+            api.pictures.postPictureDislike(this.props.currentUser.id, this.state.picture.data.id)
+            .then (() => {
+                this.grabPictureData()
+            })
+            
+        }
+        else {
+            api.pictures.deletePictureDislike(dislike.id).then(() => this.grabPictureData())
+        }
+    }
+
+    handleCommentLike = (comment) => {
+        let like = comment.attributes.likes.find(like => like.user_id === this.props.currentUser.id)
+        console.log(like)
+        if (!like) {
+            api.comments.postLike(this.props.currentUser.id, comment.id)
+            .then (() => {
+                this.grabPictureData()
+            })
+            
+        }
+        else {
+            api.comments.deleteLike(like.id).then(() => this.grabPictureData())
+        }
+    }
+
+    handleCommentDislike = (comment) => {
+        let like = comment.attributes.dislikes.find(like => like.user_id === this.props.currentUser.id)
+        if (!like) {
+            api.comments.postDislike(this.props.currentUser.id, comment.id)
+            .then (() => {
+                this.grabPictureData()
+            })   
+        }
+        else {
+            api.comments.deleteDislike(like.id).then(() => this.grabPictureData())
+        }
     }
 
     render() {   
+       const comments = this.filterComments()
         return ( 
-            this.state.picture.attributes ? (
+            this.state.picture.included ? (
             <div>
-            <img src={this.state.picture.attributes.img_url} alt={"picture"} width="600"/>
-            < AddComment roast={this.props.roast} currentUser={this.state.currentUser} pictureId={this.state.picture.id} handleNewComment={this.handleNewComment}/>
-            {this.state.comments}
+                <h2> Bio:{this.props.roast ? this.state.picture.data.attributes.roast_bio : this.state.picture.data.attributes.toast_bio} </h2>
+                <h3> Likes: {this.state.picture.data? this.state.picture.data.attributes.picture_likes.length : 0}</h3>
+                <button onClick={this.handlePictureLike}> Like</button>
+                <h3> Dislikes: {this.state.picture.data? this.state.picture.data.attributes.picture_dislikes.length : 0}</h3>
+                <button onClick={this.handlePictureDislike}> Dislike </button> <br/>
+                <img src={this.state.picture.data.attributes.img_url} alt={"picture"} width="600"/>
+                < AddComment roast={this.props.roast} currentUser={this.state.currentUser} pictureId={this.state.picture.data.id} handleNewComment={this.handleNewComment}/>
+                {comments}
             </div>
             ) :
             <div>loading</div>

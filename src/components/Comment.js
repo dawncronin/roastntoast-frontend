@@ -6,36 +6,37 @@ class Comment extends Component{
     constructor() {
         super()
         this.state = {
-            comment: [],
-            liked: "",
-            disliked: "",
+            comment: []
         }
     }
-
-    componentDidMount() {
-        api.comments.getComment(this.props.comment.id).then(res => {
-            this.setState({comment: res.data})
-            return res.data })
+    handleDelete = (e) => {
+        this.props.handleCommentDelete(this.props.comment.id)
     }
 
-    handleDelete = (e) => {
-        this.props.handleCommentDelete(this.state.comment.id)
-     
+    handleLike = (e) => {
+        this.props.handleCommentLike(this.props.comment)
+
+    }
+
+    handleDislike = (e) => {
+        this.props.handleCommentDislike(this.props.comment)
     }
 
     render() {
-        let comUser = this.state.comment.attributes ? this.state.comment.attributes.user.username : ""
-        let comUserId = this.state.comment.attributes ? this.state.comment.attributes.user.id : ""
-        let likes = this.state.comment.attributes ? this.state.comment.attributes.likes.length : ""
-        let dislikes = this.state.comment.attributes ? this.state.comment.attributes.likes.length : ""
+        let comUser = this.props.comment.attributes ? this.props.comment.attributes.user.username : ""
+        let comUserId = this.props.comment.attributes ? this.props.comment.attributes.user.id : ""
+        let likes = this.props.comment.attributes ? this.props.comment.attributes.likes.length : ""
+        let dislikes = this.props.comment.attributes ? this.props.comment.attributes.dislikes.length : ""
         let userId = this.props.currentUser.id? this.props.currentUser.id : "no user found"
         
         return (
             <div className="comment">
-                <h3>{comUser}:{this.props.comment.text}</h3>
+                <h3>{comUser}:{this.props.comment.attributes.text}</h3>
                 <h4> Like: {likes}</h4>
+                <button onClick={this.handleLike}>Like</button>
                 <h4> Dislike: {dislikes}</h4>
-                { comUserId === userId ? <button onClick={this.handleDelete}>Delete</button> : ""}
+                <button onClick={this.handleDislike}>Disike</button>
+                { comUserId === userId ? <button onClick={this.handleDelete}>Delete Comment</button> : ""}
             </div> 
         
         )

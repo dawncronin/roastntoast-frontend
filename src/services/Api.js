@@ -19,6 +19,64 @@ const getComments = () => {
   );
 };
 
+const postPictureLike = (user_id, picture_id) => {
+  return fetch(`${API_ROOT}picture_likes`, {
+    method: `Post`,
+    headers: headers,
+    body: JSON.stringify({picture_like: {user_id: user_id, picture_id: picture_id}})
+  }).then(res => res.json());
+}
+const deletePictureLike = (like_id) => {
+  return fetch(`${API_ROOT}picture_likes/${like_id}`, {
+    method: `Delete`,
+    headers: headers
+  }).then(res => res.json());
+}
+const postPictureDislike = (user_id, picture_id) => {
+  return fetch(`${API_ROOT}picture_dislikes`, {
+    method: `Post`,
+    headers: headers,
+    body: JSON.stringify({picture_dislike: {user_id: user_id, picture_id: picture_id}})
+  }).then(res => res.json());
+}
+const deletePictureDislike = (like_id) => {
+  return fetch(`${API_ROOT}picture_dislikes/${like_id}`, {
+    method: `Delete`,
+    headers: headers
+  }).then(res => res.json());
+}
+
+const postLike = (user_id, comment_id) => {
+  return fetch(`${API_ROOT}likes`, {
+    method: `Post`,
+    headers: headers,
+    body: JSON.stringify({like: {user_id: user_id, comment_id: comment_id}})
+  }).then(res => res.json());
+}
+
+const deleteLike = (like_id) => {
+  console.log(like_id)
+  return fetch(`${API_ROOT}likes/${like_id}`, {
+    method: `Delete`,
+    headers: headers
+  }).then(res => res.json());
+}
+
+
+const postDislike = (user_id, comment_id) => {
+  return fetch(`${API_ROOT}dislikes`, {
+    method: `Post`,
+    headers: headers,
+    body: JSON.stringify({dislike: {user_id: user_id, comment_id: comment_id}})
+  }).then(res => res.json());
+}
+const deleteDislike = (like_id) => {
+  return fetch(`${API_ROOT}dislikes/${like_id}`, {
+    method: `Delete`,
+    headers: headers
+  }).then(res => res.json());
+}
+
 const postPicture = ({img_url, user_id, roast_bio, toast_bio}) => {
   return fetch(`${API_ROOT}pictures`, {
     method: `Post`,
@@ -94,12 +152,20 @@ export default {
   pictures: {
     getPictures,
     postPicture,
-    getPicture
+    getPicture,
+    postPictureLike,
+    deletePictureLike,
+    postPictureDislike,
+    deletePictureDislike
   },
   comments: {
     getComment,
     getComments,
     postComment,
-    deleteComment
+    deleteComment,
+    postLike,
+    postDislike,
+    deleteLike,
+    deleteDislike
   }
 };
