@@ -9,7 +9,7 @@ function Filter(props) {
 
     return (
         <div>
-        <label for="filter-select">Filter:</label>
+        <label >Filter:</label>
 
         <select onChange = {handleChange} id="filter-select">
             <option value="default">--Please choose an option--</option>

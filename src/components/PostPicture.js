@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import api from '../services/Api'
 
 class PostPicture extends Component{
     constructor(){
@@ -11,9 +11,8 @@ class PostPicture extends Component{
         }
     }
     handleSubmit = (event) => {
-        fetch('http://localhost:3000/pictures/')
-        .then(response => response.json())
-        .then(json => console.log(json))
+        event.preventDefault()
+        api.pictures.postPicture({img_url: this.state.img_url, roast_bio: this.state.roast_bio, toast_bio: this.state.toast_bio, user_id: this.props.currentUser.id})
     }
     
     handleChange = (event) => {
@@ -22,7 +21,6 @@ class PostPicture extends Component{
         this.setState({
             [name]: value
         })
-        console.log(this.state)
     }
 
     render(){

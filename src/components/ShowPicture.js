@@ -15,7 +15,9 @@ class ShowPicture extends Component {
         }
     }
     grabPictureData = () => {
+        console.log(this.props.match)
        return api.pictures.getPicture(this.props.match.params.pictureId).then(picture => {
+           console.log(picture)
             this.setState({picture: picture.data}) 
             let comments = picture.data.attributes.comments.filter(com => com.roast === this.props.roast)
             comments = comments.map(com => < Comment handleCommentDelete={this.handleCommentDelete} comment={com} key={com.id} currentUser={this.state.currentUser}/>)
@@ -47,9 +49,9 @@ class ShowPicture extends Component {
     
     render() {   
         return ( 
-            this.state.comments[0] ? (
+            this.state.picture.attributes ? (
             <div>
-            <img src={this.state.picture.attributes.img_url} alt={"picture"}/>
+            <img src={this.state.picture.attributes.img_url} alt={"picture"} width="600"/>
             < AddComment roast={this.props.roast} currentUser={this.state.currentUser} pictureId={this.state.picture.id} handleNewComment={this.handleNewComment}/>
             {this.state.comments}
             </div>

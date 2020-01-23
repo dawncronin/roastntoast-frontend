@@ -80,7 +80,7 @@ class App extends Component {
         <Route exact path="/signup"   render={(props) => <SignUp {...props} handleLogin={this.handleLogin}/>} />
         <Route exact path="/gallery" render ={(props) => <Gallery {...props} pictures={this.state.pictures}/>} />
         <Route exact path="/profile" component={ProfilePage} />
-        <Route exact path="/addpicture" component={PostPicture} />
+        <Route exact path="/addpicture" render ={(props) => <PostPicture {...props} currentUser={this.state.currentUser}/>} />
         <Route path={`/pictures`} render={(props) => <PicturesPage {...props} 
               flipRoast={this.flipRoast} roast={this.state.roast} 
               currentUser={this.state.currentUser}/>} />
