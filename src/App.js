@@ -12,15 +12,19 @@ import ProfilePage from './containers/ProfilePage';
 import PostPicture from './components/PostPicture';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import PicturesPage from './containers/PicturesPage';
+
 
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
+      roast: true,
       currentUser: {},
       pictures: [],
-      comments: []
+      comments: [],
+
     }
   }
 
@@ -30,21 +34,48 @@ class App extends Component {
       api.auth.getCurrentUser().then(user => {
         this.setState({currentUser: user });
       });
-    };
-      // this.setState({pictures: api.pictures.getPictures})
-  };
+    }
+    api.pictures.getPictures().then( pictures => {
+      this.setState({pictures: pictures.data}) }
+    )
+    api.getUsers().then( users => {
+      this.setState({users: users.data})
+    })
+  }
+
+  componentDidUpdate() {
+      if (this.state.roast) {
+        document.body.style.backgroundColor = "#F75E1B";
+      }
+      else {
+        document.body.style.backgroundColor = "#A9F3FA";
+      }
+  }
+    
+
+  flipRoast = () => {
+    this.setState({roast: !this.state.roast})
+  }
 
   handleLogin = json => {
     const currentUser = json;
     localStorage.setItem('token', currentUser.jwt );
     this.setState({ currentUser: {username: currentUser.user.data.attributes.username, id: currentUser.user.data.id }});
-    console.log(currentUser)
   }
 
   handleLogout = () => {
     localStorage.removeItem('token');
     this.setState({ currentUser: {} });
   };
+
+  handleNewComment = ({picture_id, roast, user_id, text}) => {
+   return api.comments.postComment({picture_id: picture_id, roast: roast, user_id: user_id, text: text}).then(res => {
+      api.pictures.getPictures().then( pictures => {
+        this.setState({pictures: pictures.data}) 
+        return res}
+      )
+    })
+  }
   
   render() {
     return (
@@ -57,6 +88,7 @@ class App extends Component {
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/addpicture" component={PostPicture} />
+        <Route path={`/pictures`} render={(props) => <PicturesPage {...props} flipRoast={this.flipRoast} roast={this.state.roast} pictures={this.state.pictures} handleNewComment={this.handleNewComment} currentUser={this.state.currentUser}/>} />
       </div>
     </Router>
     );

@@ -23,13 +23,21 @@ const postPicture = (img_url, user_id, roast_bio, toast_bio) => {
 
 }
 
-const postComment = (img_id, user_id, text, roast) => {
-    return fetch(`${API_ROOT}comments/new`, {
+const postComment = ({text, roast, picture_id, user_id}) => {
+    return fetch(`${API_ROOT}comments`, {
       method: `Post`,
       headers: headers,
-      body: JSON.stringify({img_id: img_id, user_id: user_id, text: text, roast: roast})
+      body: JSON.stringify({picture_id: picture_id, user_id: user_id, text: text, roast: roast})
     }).then(res => res.json());
   };
+
+const getComment = (id) => {
+  return fetch(`${API_ROOT}comments/${id}`, {
+    method: `Get`,
+    headers: headers
+  }).then(res => res.json())
+
+}
 
 const signUp = (username, password, passwordConfirmation) => {
   return fetch(`${API_ROOT}users`, {
@@ -53,8 +61,15 @@ const getCurrentUser = () => {
   }).then(res => res.json());
 };
 
+const getUsers = () => {
+  return fetch(`${API_ROOT}users`, {
+    headers: headers
+  }).then(res => res.json());
+}
+
 export default {
   signUp,
+  getUsers,
   auth: {
     login,
     getCurrentUser
@@ -64,6 +79,7 @@ export default {
     postPicture
   },
   comments: {
+    getComment,
     getComments,
     postComment
   }
