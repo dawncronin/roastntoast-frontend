@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import Comment from "./Comment"
 import AddComment from "./AddComment"
-import { render } from '@testing-library/react';
 import api from '../services/Api';
-
 
 class ShowPicture extends Component {
     constructor() {
@@ -15,9 +13,7 @@ class ShowPicture extends Component {
         }
     }
     grabPictureData = () => {
-        console.log(this.props.match)
        return api.pictures.getPicture(this.props.match.params.pictureId).then(picture => {
-           console.log(picture)
             this.setState({picture: picture.data}) 
             let comments = picture.data.attributes.comments.filter(com => com.roast === this.props.roast)
             comments = comments.map(com => < Comment handleCommentDelete={this.handleCommentDelete} comment={com} key={com.id} currentUser={this.state.currentUser}/>)
@@ -39,14 +35,15 @@ class ShowPicture extends Component {
           }).then(() => this.grabPictureData())}
         }
 
-
-
     handleNewComment = ({picture_id, roast, user_id, text}) => {
         return api.comments.postComment({picture_id: picture_id, roast: roast, user_id: user_id, text: text})
         .then(() => this.grabPictureData())
     }
 
-    
+    componentDidUpdate() {
+        this.grabPictureData()
+    }
+
     render() {   
         return ( 
             this.state.picture.attributes ? (

@@ -14,15 +14,12 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import PicturesPage from './containers/PicturesPage';
 
-
-
 class App extends Component {
   constructor() {
     super()
     this.state = {
       roast: true,
       currentUser: {},
-      pictures: []
 
     }
   }
@@ -34,12 +31,6 @@ class App extends Component {
         this.setState({currentUser: user });
       });
     }
-    api.pictures.getPictures().then( pictures => {
-      this.setState({pictures: pictures.data}) }
-    )
-    api.getUsers().then( users => {
-      this.setState({users: users.data})
-    })
   }
 
   componentDidUpdate() {
@@ -51,7 +42,6 @@ class App extends Component {
       }
   }
     
-
   flipRoast = () => {
     this.setState({roast: !this.state.roast})
   }
@@ -67,9 +57,6 @@ class App extends Component {
     this.setState({ currentUser: {} });
   };
 
-
-  
-  
   render() {
     return (
       <Router>
