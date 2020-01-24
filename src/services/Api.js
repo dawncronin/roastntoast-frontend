@@ -142,9 +142,18 @@ const getUser = (id) => {
   }).then(res => res.json());
 }
 
+const deleteUser = (id) => {
+  return fetch(`${API_ROOT}users/${id}`, {
+    method: `Delete`,
+    headers: headers
+  }).then(res => res.json())
+}
+
+
 export default {
   signUp,
   getUser,
+  deleteUser,
   auth: {
     login,
     getCurrentUser

@@ -19,7 +19,7 @@ class App extends Component {
     super()
     this.state = {
       roast: "",
-      currentUser: {},
+      currentUser: {}
 
     }
   }
@@ -28,9 +28,10 @@ class App extends Component {
     const token = localStorage.getItem('token');
     if (token) {
       api.auth.getCurrentUser().then(user => {
-        this.setState({currentUser: user });
+        this.setState({ currentUser: user });
       });
     }
+    console.log("App mounted.")
   }
 
   componentDidUpdate() {
@@ -40,6 +41,7 @@ class App extends Component {
       else {
         document.body.style.backgroundColor = "#A9F3FA";
       }
+      console.log("App updated.")
   }
     
   flipRoast = () => {

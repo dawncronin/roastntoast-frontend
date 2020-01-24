@@ -34,9 +34,9 @@ class Gallery extends Component{
         let pictures = this.state.allPictures
         if(filter === 'most_likes'){
             return newPictures = pictures.sort(function(a, b){return b.attributes.picture_likes.length - a.attributes.picture_likes.length})    
-        }else if (filter === 'most_dislikes'){
+        } else if (filter === 'most_dislikes'){
             return newPictures = pictures.sort(function(a, b){return b.attributes.picture_dislikes.length - a.attributes.picture_dislikes.length})
-        }else if(filter ==='least_likes'){
+        } else if(filter ==='least_likes'){
             return newPictures = pictures.sort(function(a, b){return a.attributes.created_at - b.attributes.created_at})
         } else if(filter === 'least_dislikes'){
             return newPictures = pictures.sort(function(a, b){return b.attributes.created_at - a.attributes.created_at})
