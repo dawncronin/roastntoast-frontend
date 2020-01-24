@@ -20,10 +20,13 @@ function PicturesPage({match, roast, flipRoast, currentUser}) {
     }
 
     return(
+        
 
-        <div>
+        <div className={`picture${roast}`} >
+            <span>
             <h1> Currently {currentState} </h1>
-            <button onClick={flipRoast}>Flip to {flipState}</button>
+            <button className="flipButton"onClick={flipRoast}>Flip to {flipState}</button>
+            </span>
           <Route path={`${match.url}/:pictureId`} render={routerProps => <ShowPicture {...routerProps} roast={roast} currentUser={currentUser}/> }/>
         </div>
       )

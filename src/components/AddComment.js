@@ -27,9 +27,9 @@ class AddComment extends Component {
     return (
         <div className="addComment">
            <form onSubmit={this.handleSubmit}>
-               <label> Add a Comment:
+               <label> 
                <textarea name="text" value={this.state.commentText} onChange={this.handleChange} placeholder= {this.props.roast ? "add a new roast" : "add a new toast"}/>
-               </label>
+               </label> <br/>
                <input type="submit" name="submit"/>
            </form>
         </div>

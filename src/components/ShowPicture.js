@@ -115,12 +115,12 @@ class ShowPicture extends Component {
         return ( 
             this.state.picture.included ? (
             <div>
-                <h2> Bio:{this.props.roast ? this.state.picture.data.attributes.roast_bio : this.state.picture.data.attributes.toast_bio} </h2>
-                <h3> Likes: {this.state.picture.data? this.state.picture.data.attributes.picture_likes.length : 0}</h3>
-                <button onClick={this.handlePictureLike}> Like</button>
-                <h3> Dislikes: {this.state.picture.data? this.state.picture.data.attributes.picture_dislikes.length : 0}</h3>
-                <button onClick={this.handlePictureDislike}> Dislike </button> <br/>
-                <img src={this.state.picture.data.attributes.img_url} alt={"picture"} width="600"/>
+                <h2> {this.props.roast ? this.state.picture.data.attributes.roast_bio : this.state.picture.data.attributes.toast_bio} </h2>
+                 {this.state.picture.data? this.state.picture.data.attributes.picture_likes.length : 0}
+                <button className={`${this.props.roast}-upvote`} onClick={this.handlePictureLike}> </button>
+                {this.state.picture.data? this.state.picture.data.attributes.picture_dislikes.length : 0}
+                <button className={`${this.props.roast}-downvote`} onClick={this.handlePictureDislike}>  </button> <br/>
+                <img className="picturePageImg"src={this.state.picture.data.attributes.img_url} alt={"picture"} width="600"/>
                 < AddComment roast={this.props.roast} currentUser={this.state.currentUser} pictureId={this.state.picture.data.id} handleNewComment={this.handleNewComment}/>
                 {comments}
             </div>

@@ -35,19 +35,19 @@ class SignUp extends Component {
     render() {
         return (
             <div className="signup">
-                <h1> Sign Up</h1>
+                <h2> Sign Up</h2>
                 {this.state.error ? <h3>Invalid Inputs, try again</h3> : null}
                 <form className="signUpForm" onSubmit={this.handleSubmit}>
-                    <label> Username
-                    <input type="text" name="username" onChange={this.handleChange}/>
+                    <label> 
+                    <input type="text" name="username" placeholder="username" onChange={this.handleChange}/>
                     </label> <br/>
-                    <label> Password
-                    <input type="password" name="password" onChange={this.handleChange}/> 
+                    <label> 
+                    <input type="password" name="password" placeholder="password" onChange={this.handleChange}/> 
                     </label> <br/>
-                    <label>Confirm Password
-                    <input type="password" name="passwordConfirmation" onChange={this.handleChange}/> <br/>
+                    <label>
+                    <input type="password" name="passwordConfirmation" placeholder="confirm password" onChange={this.handleChange}/> <br/>
                     </label>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Signup" />
                 </form>
             </div>
     )

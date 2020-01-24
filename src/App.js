@@ -18,7 +18,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      roast: "",
+      roast: true,
       currentUser: {},
 
     }
@@ -34,12 +34,15 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-      if (this.state.roast) {
-        document.body.style.backgroundColor = "#F75E1B";
-      }
-      else {
-        document.body.style.backgroundColor = "#A9F3FA";
-      }
+      // if (this.state.roast) {
+      //   document.querySelector(".picturesPage").style.backgroundColor = "#F75E1B";
+      // }
+      // else if (this.state.roast === false) {
+      //   document.querySelector(".picturesPage").style.backgroundColor ="#A9F3FA";
+      // }
+      // else {
+      //   document.querySelector(".picturesPage").style.backgroundColor = "#ccc";
+      // }
   }
     
   flipRoast = () => {
@@ -62,7 +65,7 @@ class App extends Component {
       <Router>
       <div className="app">
         <NavBar handleLogout={this.handleLogout} currentUser={this.state.currentUser}/>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" render={(props) => <Home {...props} currentUser={this.state.currentUser}/>} />
         <Route exact path="/login"   render={(props) => <Login {...props} handleLogin={this.handleLogin}/>} />
         <Route exact path="/signup"   render={(props) => <SignUp {...props} handleLogin={this.handleLogin}/>} />
         <Route exact path="/gallery" render ={(props) => <Gallery {...props} pictures={this.state.pictures}/>} />
@@ -71,6 +74,12 @@ class App extends Component {
         <Route path={`/pictures`} render={(props) => <PicturesPage {...props} 
               flipRoast={this.flipRoast} roast={this.state.roast} 
               currentUser={this.state.currentUser}/>} />
+
+        <div className="footer">
+          Allen & Dawn Productions  <br/>
+          2020
+
+        </div>
       </div>
     </Router>
     );

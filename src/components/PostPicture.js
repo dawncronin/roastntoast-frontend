@@ -31,6 +31,7 @@ class PostPicture extends Component{
     render(){
         return (
             <div className= 'picturepost'>
+                <h3> Add a new picture:</h3>
                 <form className ='picturepostform' onSubmit ={this.handleSubmit}>
                     <label>Img URL: 
                     <input onChange = {this.handleChange} type = 'text' name = 'img_url'/><br></br>

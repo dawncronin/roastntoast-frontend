@@ -31,12 +31,13 @@ class Comment extends Component{
         
         return (
             <div className="comment">
-                <h3>{comUser}:{this.props.comment.attributes.text}</h3>
-                <h4> Like: {likes}</h4>
-                <button onClick={this.handleLike}>Like</button>
-                <h4> Dislike: {dislikes}</h4>
-                <button onClick={this.handleDislike}>Disike</button>
-                { comUserId === userId ? <button onClick={this.handleDelete}>Delete Comment</button> : ""}
+                <span className="commentSpan">
+                {likes} <button className={`${this.props.roast}-upvote`} onClick={this.handleLike}></button>
+                {dislikes} <button className={`${this.props.roast}-downvote`} onClick={this.handleDislike}></button>
+                {this.props.comment.attributes.text} <br/>
+                posted by: {comUser}
+                { comUserId === userId ? <button className="deleteComment"onClick={this.handleDelete}>Delete Comment</button> : ""}
+                </span>
             </div> 
         
         )

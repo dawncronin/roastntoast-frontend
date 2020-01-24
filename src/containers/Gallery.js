@@ -59,7 +59,6 @@ class Gallery extends Component{
         <div className="gallery">
             <Filter handleChange = {this.handleChange}/>
             <PictureList pictures = {pictures}/>
-            <button onClick= {this.testFunction}>Test</button>
         </div>
     )
     }

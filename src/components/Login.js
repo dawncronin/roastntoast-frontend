@@ -35,16 +35,16 @@ class Login extends Component {
     render() {
     return (
         <div className="login">
-            <h1> Login:</h1>
+            <h2> Login</h2>
             {this.state.error ? <h2>Try Again</h2> : null}
             <form className="loginForm" onSubmit={this.handleSubmit}>
-                <label> Username
-                <input type="text" name="username" onChange={this.handleChange}/>
+                <label> 
+                <input type="text" name="username" placeholder="username" onChange={this.handleChange}/>
                 </label> <br/>
-                <label> Password
-                <input type="password" name="password" onChange={this.handleChange}/> 
+                <label>
+                <input type="password" name="password" placeholder="password" onChange={this.handleChange}/> 
                 </label> <br/>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Login" />
             </form>
         </div>
     )

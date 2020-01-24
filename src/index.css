@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0px 0px 0px 0px;
   background-color: #ccc;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -27,15 +27,20 @@ ul {
   overflow: hidden;
   background-color: #333;
 }
+
+ul :hover {
+  color: orangered;
+}
 .nav{
   display: block;
   color: white;
   text-align: center;
-  padding: 35px 16px;
+  padding: 35px 16px 10px 10px;
   text-decoration: none;
 }
 li {
   float: left;
+
 }
 a {
   color: #FFF;
@@ -50,17 +55,238 @@ a {
 .login, .signup, .picturepost{
   background-color: rgb(233, 236, 236);
   text-align: center;
-  width: 30%;
+  width: 20%;
+  margin-top: 100px;
+  padding: 10px 5px 20px 5px;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border-radius: 5px;
 }
-input[type=text] {
+input[type=text], input[type=password]{
+  font-size: 10pt;
+  border-radius: 5px;
   width : 150px;
-  padding: 0;
-  margin: 0;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 5px 5px 5px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  background-color: rgb(61, 184, 65); /* Green */
+  border-radius: 4px;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+textarea {
+  display: inline-block;
+  font-size: 10pt;
+  border-radius: 4px;
+  width : 75%;
+  padding: 10px 10px 10px 10px;
+  margin: 5px 5px 5px 5px;
+}
+
+.addComment {
+  margin-top: 100px;
+  background-color: rgb(233, 236, 236);
+  text-align: center;
+  width: 75%;
+  padding: 5px 5px 20px 5px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.picturetrue {
+  background-color: rgb(219, 97, 40);
+  text-align: center;
+  width: 50%;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  padding: 5px 5px 20px 5px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.picturefalse {
+  background-color: rgb(64, 149, 189);
+  text-align: center;
+  width: 50%;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  padding: 5px 5px 20px 5px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  transition: 0.3s;
+
+}
+
+.true-upvote {
+  background-color: rgb(219, 97, 40);
+  display: inline-block;
+  background-image: url("upvote.png");
+  background-size: cover;
+  background-position: center;
+  display: inline-block; 
+  border: none; 
+  margin: 10px 10px 10px 10px;
+  padding: 30px 30px 30px 30px; 
+  width: 35px; 
+  cursor: pointer;
+  transition: 0.3s;
+
+}
+
+.false-upvote {
+  background-color:  rgb(64, 149, 189);
+  background-image: url("upvote.png");
+  background-size: cover;
+  background-position: center;
+  display: inline-block; 
+  border: none; 
+  margin: 10px 10px 10px 10px;
+  padding: 30px 30px 30px 30px; 
+  width: 35px; 
+  cursor: pointer;
+  transition: 0.3s;
+
+}
+
+.true-downvote {
+  background-color: rgb(219, 97, 40);
+  background-image: url("downvote.png");
+  background-size: cover;
+  background-position: center;
+  display: inline-block; 
+  border: none; 
+  margin: 10px 10px 10px 10px;
+  padding: 30px 30px 30px 30px; 
+  width: 35px; 
+  cursor: pointer;
+  transition: 0.3s;
+
+}
+
+.picturePageImg {
+  width: 75%;
+  border-radius: 5px
+}
+
+.false-downvote {
+  background-color:  rgb(64, 149, 189);
+  background-image: url("downvote.png");
+    background-size: cover;
+  background-position: center;
+  display: inline; 
+  border: none; 
+  margin: 10px 10px 10px 10px;
+  padding: 30px 30px 30px 30px; 
+  width: 35px; 
+  cursor: pointer;
+  transition: 0.3s;
+
+}
+
+.flipButton {
+  background-color: rgb(61, 184, 65); /* Green */
+  border-radius: 4px;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  font-size: 16px;
+}
+
+.comment {
+  text-align: left;
+  width: 75%;
+  margin-top: 10px;
+  padding: 5px 5px 5px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.commentSpan, cardSpan{
+  display: inline;
+}
+
+.deleteComment {
+  background-color: rgb(110, 116, 110); /* Green */
+  border-radius: 4px;
+  color: white;
+  padding: 5px 5px 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+
+.navBar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.footer {
+  padding-top: 200px;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  /* height: 2.5rem;  */
+}
+
+.home, .gallery, .profilePage {
+  margin-top: 100px;
+}
+.filter {
+  text-align: center;
+}
+
+input[type=select] {
+  font-size: 10pt;
+  border-radius: 5px;
+  width : 150px;
+  padding: 5px 5px 5px 5px;
+  margin: 5px 5px 5px 5px;
   box-sizing: border-box;
 
+}
+
+.pictureCard {
+  background-color: rgb(129, 150, 151);
+  text-align: center;
+  width: 50%;
+  margin-top: 10px;
+  padding: 5px 5px 5px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.pictureCardPicture {
+  border-radius: 5px;
+  display: inline;
 }

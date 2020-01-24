@@ -8,7 +8,7 @@ function Filter(props) {
     }
 
     return (
-        <div>
+        <div className="filter">
         <label >Filter:</label>
 
         <select onChange = {handleChange} id="filter-select">
