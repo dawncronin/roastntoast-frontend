@@ -233,6 +233,7 @@ textarea {
   background-color: rgb(110, 116, 110); /* Green */
   border-radius: 4px;
   color: white;
+  margin: 5px 5px 5px 5px;
   padding: 5px 5px 5px 5px;
   text-align: center;
   text-decoration: none;
@@ -273,7 +274,11 @@ input[type=select] {
 
 }
 
-.pictureCard {
+.profilePage {
+  text-align: center
+}
+
+.pictureCard, .profileCard{
   background-color: rgb(129, 150, 151);
   text-align: center;
   width: 50%;

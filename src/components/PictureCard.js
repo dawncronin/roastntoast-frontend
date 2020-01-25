@@ -8,7 +8,7 @@ function PictureCard({attribute, id}) {
     return (
         <NavLink to = {`/pictures/${id}`} exact>
         <div className="pictureCard">
-            <img className="pictureCardPicture" src = {attribute.img_url} width="200" height="200"></img>
+            <img className="pictureCardPicture" src = {attribute.img_url} height="200"></img>
              <br/> <span className="cardSpan"> Posted By: {attribute.user.username}
             <p>Roast Bio: {attribute.roast_bio}</p>
             <p>Toast Bio: {attribute.toast_bio}</p>
@@ -19,4 +19,4 @@ function PictureCard({attribute, id}) {
     )
 }
 
-export default PictureCard
+export default PictureCard      

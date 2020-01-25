@@ -35,7 +35,7 @@ class Comment extends Component{
                 {likes} <button className={`${this.props.roast}-upvote`} onClick={this.handleLike}></button>
                 {dislikes} <button className={`${this.props.roast}-downvote`} onClick={this.handleDislike}></button>
                 {this.props.comment.attributes.text} <br/>
-                posted by: {comUser}
+                {/* posted by: {comUser} */}
                 { comUserId === userId ? <button className="deleteComment"onClick={this.handleDelete}>Delete Comment</button> : ""}
                 </span>
             </div> 

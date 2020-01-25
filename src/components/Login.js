@@ -23,6 +23,7 @@ class Login extends Component {
         e.preventDefault();
         api.auth.login(this.state.fields.username, this.state.fields.password)
         .then(json => {
+            console.log(json)
           if ( json.error ) {
             this.setState({ error: true })
           } else {
@@ -36,7 +37,7 @@ class Login extends Component {
     return (
         <div className="login">
             <h2> Login</h2>
-            {this.state.error ? <h2>Try Again</h2> : null}
+            {this.state.error ? <h4>Invalid Username or Password, Try Again</h4> : null}
             <form className="loginForm" onSubmit={this.handleSubmit}>
                 <label> 
                 <input type="text" name="username" placeholder="username" onChange={this.handleChange}/>

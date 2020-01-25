@@ -16,7 +16,9 @@ class PostPicture extends Component{
         api.pictures.postPicture({img_url: this.state.img_url, roast_bio: this.state.roast_bio, toast_bio: this.state.toast_bio, user_id: this.props.currentUser.id})
         .then(json => {
             console.log(json)
+            if (!json.message) {
             this.props.history.push(`/pictures/${json.picture.data.id}`)
+            }
         })
     }
     

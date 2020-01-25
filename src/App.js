@@ -28,21 +28,14 @@ class App extends Component {
     const token = localStorage.getItem('token');
     if (token) {
       api.auth.getCurrentUser().then(user => {
-        this.setState({currentUser: user });
+        this.setState({ currentUser: user });
       });
     }
+    console.log("App mounted.")
   }
 
   componentDidUpdate() {
-      // if (this.state.roast) {
-      //   document.querySelector(".picturesPage").style.backgroundColor = "#F75E1B";
-      // }
-      // else if (this.state.roast === false) {
-      //   document.querySelector(".picturesPage").style.backgroundColor ="#A9F3FA";
-      // }
-      // else {
-      //   document.querySelector(".picturesPage").style.backgroundColor = "#ccc";
-      // }
+
   }
     
   flipRoast = () => {
