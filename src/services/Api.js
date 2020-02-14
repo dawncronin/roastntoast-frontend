@@ -1,4 +1,4 @@
-const API_ROOT = `https://roast-n-toast-backend.herokuapp.com/`;
+const API_ROOT = `https://roast-n-toast-backend.herokuapp.com/api/v1/`;
 
 let token = localStorage.getItem("token")
 
