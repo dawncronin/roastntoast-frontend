@@ -20,7 +20,7 @@ class ProfilePage extends Component{
         console.log(this.state.currentUser)
         const token = localStorage.getItem('token');
         if (token) {
-
+            
             api.getUser(this.props.currentUser.id).then(res => {
                 console.log(res.data)
                 this.setState({userDetails: res.data})

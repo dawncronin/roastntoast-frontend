@@ -19,7 +19,6 @@ function NavBar(props) {
                 <li className="nav"><NavLink to="/addpicture">Add Picture</NavLink></li>
                 <li className="nav"><NavLink to="/" onClick={props.handleLogout}>Logout</NavLink> </li> 
                 </div>
-                
             ) : ( 
                 <div>
             <li className="nav"><NavLink to="/login">Login</NavLink></li> 
